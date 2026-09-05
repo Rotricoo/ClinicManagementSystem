@@ -1,0 +1,23 @@
+.
+├── ClinicManagementSysten
+├── Management
+│   └── clinic_manager.py
+├── People
+│   ├── Patient
+│   │   ├── patient.py
+│   │   └── vip_patient.py
+│   └── Staff
+│       └── MedicalStaff
+│           ├── doctor.py
+│           ├── medical_staff.py
+│           └── nurse.py
+├── Storage
+│   └── pickle.py
+├── User interaction
+│   ├── terminal_menu.py
+│   └── tkinter_dashboard.py
+├── documentation.txt
+├── main.py
+└── structure.txt
+
+9 directories, 12 files

@@ -1,0 +1,13 @@
+Every medical staff member has a name, staff ID, and hours worked today.
+
+There are two subclasses:
+
+Nurse has a specific attribute to track how many patients they attended today.
+Nurse also has a method to record each newly attended patient.
+
+Doctor has a specific attribute for the shift operational budget.
+Doctor also has a method that checks whether a given amount is still within the budget.
+
+Every patient has a name, contact details, and number of visits.
+
+VIPPatient adds a priority care tier and overrides the priority calculation so VIP patients receive higher priority than regular patients.
