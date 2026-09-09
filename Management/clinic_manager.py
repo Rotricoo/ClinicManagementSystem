@@ -14,11 +14,19 @@ class ClinicManager:
 
     # Function to add staff member
     def add_staff_member(self, staff_member):
-        self.staff_members.append(staff_member)
+        if self.find_person_by_name(staff_member.name):
+            return False
+        else:
+            self.staff_members.append(staff_member)
+            return True
 
     # Function to add patient
     def add_patient(self, patient):
-        self.patients.append(patient)
+        if self.find_person_by_name(patient.name):
+            return False
+        else:
+            self.patients.append(patient)
+            return True
 
     # Function to show staff member
     def display_staff_members(self):
@@ -30,11 +38,24 @@ class ClinicManager:
         for patient in self.patients:
             print(patient)
 
+
     # Function to search staff by name
     def find_staff_by_name(self, name):
         for staff_member in self.staff_members:
             if staff_member.name == name:
                 return staff_member
+
+        return None
+
+    # Function to search any person by name across staff and patients
+    def find_person_by_name(self, name):
+        found_staff = self.find_staff_by_name(name)
+        if found_staff:
+            return found_staff
+
+        found_patient = self.find_patient_by_name(name)
+        if found_patient:
+            return found_patient
 
         return None
 
@@ -62,45 +83,37 @@ class ClinicManager:
     def daily_report(self, budget_amount = 0):
         total_staff = len(self.staff_members)
         total_patients = len(self.patients)
+        nurses = []
+        doctors = []
         number_of_nurses = 0
         number_of_doctors = 0
         number_of_vip_patients = 0
+        doctor_budget_status = []
         total_patients_attended = 0
 
         for staff_member in self.staff_members:
             if isinstance(staff_member, Nurse):
                 number_of_nurses += 1
+                total_patients_attended += staff_member.patients_attended_today
+                nurses.append(staff_member)
+                
 
-        for staff_member in self.staff_members:
-            if isinstance(staff_member, Doctor):
+            elif isinstance(staff_member, Doctor):
                 number_of_doctors += 1
 
-        for patient in self.patients:
-            if isinstance(patient, VIPPatient):
-                number_of_vip_patients += 1
-
-        for staff_member in self.staff_members:
-            if isinstance(staff_member, Nurse):
-                total_patients_attended += staff_member.patients_attended_today
-
-        nurses = []
-        for staff_member in self.staff_members:
-            if isinstance(staff_member, Nurse):
-                nurses.append(staff_member)
-
+                if staff_member.check_budget(budget_amount):
+                    doctor_budget_status.append(f"{staff_member.name}: Within budget!")
+                else:
+                    doctor_budget_status.append(f"{staff_member.name}: Budget exceeded!")
+        
         if nurses:
             top_nurse = max(nurses, key=lambda nurse:nurse.patients_attended_today)
         else:
             top_nurse = None
 
-        doctor_budget_status = []
-
-        for staff_member in self.staff_members:
-            if isinstance(staff_member, Doctor):
-                if staff_member.check_budget(budget_amount):
-                    doctor_budget_status.append(f"{staff_member.name}: Within budget!")
-                else:
-                    doctor_budget_status.append(f"{staff_member.name}: Budget exceeded!")
+        for patient in self.patients:
+            if isinstance(patient, VIPPatient):
+                number_of_vip_patients += 1
 
         return {
             "total_staff": total_staff,

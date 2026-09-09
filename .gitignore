@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+clinic_data.pkl
+Storage/clinic_data.pkl
+documentation.txt
+structure.txt
