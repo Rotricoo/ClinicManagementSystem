@@ -9,7 +9,7 @@ class Doctor(MedicalStaff):
         self.shift_operational_budget = shift_operational_budget
 
     def check_budget(self, amount):
-        return amount <= self.shift_operational_budget
+        return self.shift_operational_budget <= amount
 
     def __str__(self):
         return f"{self.name} | ID: {self.person_id} | Hours: {self.hours_worked_today} | Budget: {self.shift_operational_budget}"

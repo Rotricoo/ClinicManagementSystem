@@ -30,11 +30,17 @@ class ClinicManager:
 
     # Function to show staff member
     def display_staff_members(self):
+        if not self.staff_members:
+            print("No staff members registered.")
+            return
         for staff_member in self.staff_members:
             print(staff_member)
 
     # Function to show patients
     def display_patients(self):
+        if not self.patients:
+            print("No patients registered.")
+            return
         for patient in self.patients:
             print(patient)
 
@@ -42,7 +48,7 @@ class ClinicManager:
     # Function to search staff by name
     def find_staff_by_name(self, name):
         for staff_member in self.staff_members:
-            if staff_member.name == name:
+            if staff_member.name.lower() == name.lower():
                 return staff_member
 
         return None
@@ -62,10 +68,30 @@ class ClinicManager:
     # Function to search patient by name
     def find_patient_by_name(self, name):
         for patient in self.patients:
-            if patient.name == name:
+            if patient.name.lower() == name.lower():
                 return patient
 
         return None
+
+    def find_staff_by_id(self, person_id):
+        return next((staff for staff in self.staff_members if staff.person_id.upper() == person_id.upper()), None)
+
+    def find_patient_by_id(self, person_id):
+        return next((patient for patient in self.patients if patient.person_id.upper() == person_id.upper()), None)
+
+    def delete_staff(self, person_id):
+        staff = self.find_staff_by_id(person_id)
+        if staff is None:
+            return False
+        self.staff_members.remove(staff)
+        return True
+
+    def delete_patient(self, person_id):
+        patient = self.find_patient_by_id(person_id)
+        if patient is None:
+            return False
+        self.patients.remove(patient)
+        return True
 
     def generate_id(self, prefix):
         id_count = 0

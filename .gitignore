@@ -4,3 +4,6 @@ clinic_data.pkl
 Storage/clinic_data.pkl
 documentation.txt
 structure.txt
+*.csv
+*.txt
+reports/
