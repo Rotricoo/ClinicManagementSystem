@@ -1,14 +1,16 @@
+# Purpose: define the patient type that receives priority care.
+# Group members: Rick Grimes - 123456
+# Date: 2026-09-14
+
 from People.Patient.patient import Patient
 
-
-# VIPPatient is a subclass of Patient.
-# It reuses the normal patient information and overrides the priority behavior.
 class VIPPatient(Patient):
     def __init__(self, name, person_id, contact_detail, number_of_visits, priority_care_tier):
         super().__init__(name, person_id, contact_detail, number_of_visits)
         self.priority_care_tier = priority_care_tier
 
     def calculate_priority(self):
+        # Overriding the base behavior keeps priority policy polymorphic.
         return "High Priority - VIP Client"
 
     def __str__(self):

@@ -1,3 +1,7 @@
+# Purpose: provide the interactive terminal menus for clinic operations.
+# Group members: Rick Grimes - 123456
+# Date: 2026-09-14
+
 from Management.clinic_manager import ClinicManager
 from People.Patient.patient import Patient
 from People.Patient.vip_patient import VIPPatient
@@ -130,6 +134,7 @@ def patient_menu(clinic):
 
 
 def add_patient(clinic, is_vip):
+    # One flow for both patient types keeps validation and persistence consistent.
     try:
         name = get_name_input("VIP Patient name (or 'cancel'): " if is_vip else "Patient name (or 'cancel'): ", allow_cancel=True)
         if clinic.find_person_by_name(name):
@@ -153,6 +158,7 @@ def report_menu(clinic):
     while True:
         show_reports_menu()
         choice = get_text_input("Choose an option: ")
+        # Reports use the same operational budget threshold across menu actions.
         report = clinic.daily_report(300)
         if choice == "1":
             display_daily_report(report)
@@ -288,6 +294,7 @@ def get_name_input(message, allow_cancel=False):
     while True:
         name = input(message).strip()
         check_cancel(name, allow_cancel)
+        # Normalize names once so searches and duplicate checks are consistent.
         name = name.lower()
         if not name:
             print("This field cannot be empty.")

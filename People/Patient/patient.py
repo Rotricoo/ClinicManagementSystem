@@ -1,5 +1,7 @@
-# This file defines the base class for regular patients.
-# Patient stores shared patient information and basic visit/priority behavior.
+# Purpose: define the base patient model and regular-priority behavior.
+# Group members: Rick Grimes - 123456
+# Date: 2026-09-14
+
 class Patient:
     def __init__(self, name, person_id, contact_detail, number_of_visits):
         self.name = name
@@ -11,6 +13,7 @@ class Patient:
         self.number_of_visits += 1
 
     def calculate_priority(self):
+        # Keeping this method on the base class lets VIP patients override it.
         return "Regular Priority"
     
     def __str__(self):

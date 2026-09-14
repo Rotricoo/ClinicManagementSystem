@@ -1,3 +1,7 @@
+# Purpose: verify clinic management, reporting, deletion, and persistence behavior.
+# Group members: Rick Grimes - 123456
+# Date: 2026-09-14
+
 import tempfile
 import unittest
 from pathlib import Path
@@ -40,6 +44,7 @@ class ClinicManagerTests(unittest.TestCase):
         self.assertFalse(self.clinic.delete_patient("PAT0001"))
 
     def test_pickle_round_trip(self):
+        # A temporary path prevents tests from changing the user's real data file.
         with tempfile.TemporaryDirectory() as directory:
             original_path = storage_manager.DATA_FILE
             storage_manager.DATA_FILE = Path(directory) / "clinic_data.pkl"

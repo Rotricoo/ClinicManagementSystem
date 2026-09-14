@@ -6,4 +6,5 @@ documentation.txt
 structure.txt
 *.csv
 *.txt
+!README.txt
 reports/

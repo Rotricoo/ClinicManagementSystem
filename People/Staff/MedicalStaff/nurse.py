@@ -1,7 +1,8 @@
-from People.Staff.MedicalStaff.medical_staff import MedicalStaff
+# Purpose: define nurses and track patients attended during the day.
+# Group members: Rick Grimes - 123456
+# Date: 2026-09-14
 
-# Nurse is a subclass of MedicalStaff.
-# It reuses the shared staff information and adds patient attendance tracking.
+from People.Staff.MedicalStaff.medical_staff import MedicalStaff
 class Nurse(MedicalStaff):
     def __init__(self, name, person_id, hours_worked_today, patients_attended_today):
         super().__init__(name, person_id, hours_worked_today)

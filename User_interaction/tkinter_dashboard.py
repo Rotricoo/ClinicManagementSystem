@@ -1,5 +1,10 @@
+# Purpose: display clinic summaries and registered people in a Tkinter window.
+# Group members: Rick Grimes - 123456
+# Date: 2026-09-14
+
 import tkinter as tk
 from tkinter import ttk
+
 
 def open_dashboard(clinic):
     window = tk.Tk()
@@ -15,7 +20,13 @@ def open_dashboard(clinic):
     cards = ttk.Frame(window, padding=(12, 0, 12, 12))
     cards.pack(fill="x")
     card_values = {}
-    for column, (key, label) in enumerate((("total_staff", "Staff"), ("total_patients", "Patients"), ("number_of_nurses", "Nurses"), ("number_of_doctors", "Doctors"))):
+    card_definitions = (
+        ("total_staff", "Staff"),
+        ("total_patients", "Patients"),
+        ("number_of_nurses", "Nurses"),
+        ("number_of_doctors", "Doctors"),
+    )
+    for column, (key, label) in enumerate(card_definitions):
         card = ttk.LabelFrame(cards, text=label, padding=10)
         card.grid(row=0, column=column, padx=4, sticky="nsew")
         cards.columnconfigure(column, weight=1)
@@ -42,6 +53,7 @@ def open_dashboard(clinic):
     scrollbar.pack(side="right", fill="y")
 
     def refresh():
+        # Rebuild all visible values from the model so Refresh remains reliable.
         report = clinic.daily_report(300)
         for key, label in card_values.items():
             label.config(text=report[key])

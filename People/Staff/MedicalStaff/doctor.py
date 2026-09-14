@@ -1,14 +1,16 @@
+# Purpose: define doctors and their operational budget checks.
+# Group members: Rick Grimes - 123456
+# Date: 2026-09-14
+
 from People.Staff.MedicalStaff.medical_staff import MedicalStaff
 
-
-# Doctor is a subclass of MedicalStaff.
-# It reuses the shared staff information and adds shift budget checking.
 class Doctor(MedicalStaff):
     def __init__(self, name, person_id, hours_worked_today, shift_operational_budget):
         super().__init__(name, person_id, hours_worked_today)
         self.shift_operational_budget = shift_operational_budget
 
     def check_budget(self, amount):
+        # The report passes its allowed amount, so equality remains within budget.
         return self.shift_operational_budget <= amount
 
     def __str__(self):

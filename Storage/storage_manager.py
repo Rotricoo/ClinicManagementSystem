@@ -1,3 +1,7 @@
+# Purpose: persist clinic data and export reports to common text formats.
+# Group members: Rick Grimes - 123456
+# Date: 2026-09-14
+
 import pickle
 import csv
 from pathlib import Path
@@ -6,13 +10,13 @@ DATA_FILE = Path(__file__).parent / "clinic_data.pkl"
 
 
 def save_data(clinic):
-    # Save the full ClinicManager object to a local pickle file
+    # Pickle preserves the object graph, so all domain types reload together.
     with open(DATA_FILE, "wb") as file:
         pickle.dump(clinic, file)
 
 
 def load_data():
-    # Load the saved ClinicManager object if the data file exists.
+    # A missing file is normal on first launch, so return None instead of failing.
     try:
         with open(DATA_FILE, "rb") as file:
             return pickle.load(file)
@@ -23,6 +27,7 @@ def load_data():
 def export_report_to_txt(report, file_path):
     file_path = Path(file_path)
     if file_path.is_dir():
+        # Directory input gets a stable filename for predictable exports.
         file_path = file_path / "daily_report.txt"
     with open(file_path, "w", encoding="utf-8") as file:
         file.write("Daily Report\n")

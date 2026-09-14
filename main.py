@@ -1,3 +1,7 @@
+# Purpose: start the clinic application and load initial data.
+# Group members: Rick Grimes - 123456
+# Date: 2026-09-14
+
 from Management.clinic_manager import ClinicManager
 from People.Patient.patient import Patient
 from People.Patient.vip_patient import VIPPatient
@@ -8,6 +12,7 @@ from User_interaction import terminal_menu
 
 
 def load_sample_data(clinic):
+    # Sample records make a first run useful before the user registers data.
     clinic.add_staff_member(Nurse("Maria", "NUR0001", 8, 2))
     clinic.add_staff_member(Nurse("Julia", "NUR0002", 7, 5))
     clinic.add_staff_member(Doctor("Lucas", "DOC0001", 8, 500))
@@ -18,6 +23,7 @@ def load_sample_data(clinic):
 def setup_clinic():
     clinic = load_data()
     if clinic is None:
+        # A missing persistence file means this is the first run.
         clinic = ClinicManager()
         load_sample_data(clinic)
     return clinic

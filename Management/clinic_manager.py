@@ -1,5 +1,6 @@
-# ClinicManager is the container class for the system.
-# It will store staff and patients, then provide methods to manage them.
+# Purpose: manage clinic records and produce operational reports.
+# Group members: Rick Grimes - 123456
+# Date: 2026-09-14
 
 from People.Staff.MedicalStaff.nurse import Nurse
 from People.Staff.MedicalStaff.doctor import Doctor
@@ -7,28 +8,27 @@ from People.Patient.patient import Patient
 from People.Patient.vip_patient import VIPPatient
 
 class ClinicManager:
-    # Inicialization with empty lists
+    # Separate collections keep staff and patient operations easy to query.
     def __init__(self):
         self.staff_members = []
         self.patients = []
 
-    # Function to add staff member
     def add_staff_member(self, staff_member):
+        # Names are unique across the whole clinic to avoid ambiguous searches.
         if self.find_person_by_name(staff_member.name):
             return False
         else:
             self.staff_members.append(staff_member)
             return True
 
-    # Function to add patient
     def add_patient(self, patient):
+        # Apply the same cross-category uniqueness rule to patients.
         if self.find_person_by_name(patient.name):
             return False
         else:
             self.patients.append(patient)
             return True
 
-    # Function to show staff member
     def display_staff_members(self):
         if not self.staff_members:
             print("No staff members registered.")
@@ -36,7 +36,6 @@ class ClinicManager:
         for staff_member in self.staff_members:
             print(staff_member)
 
-    # Function to show patients
     def display_patients(self):
         if not self.patients:
             print("No patients registered.")
@@ -45,7 +44,6 @@ class ClinicManager:
             print(patient)
 
 
-    # Function to search staff by name
     def find_staff_by_name(self, name):
         for staff_member in self.staff_members:
             if staff_member.name.lower() == name.lower():
@@ -53,8 +51,8 @@ class ClinicManager:
 
         return None
 
-    # Function to search any person by name across staff and patients
     def find_person_by_name(self, name):
+        # Centralizing this lookup prevents duplicate-name checks from diverging.
         found_staff = self.find_staff_by_name(name)
         if found_staff:
             return found_staff
@@ -65,7 +63,6 @@ class ClinicManager:
 
         return None
 
-    # Function to search patient by name
     def find_patient_by_name(self, name):
         for patient in self.patients:
             if patient.name.lower() == name.lower():
@@ -94,6 +91,7 @@ class ClinicManager:
         return True
 
     def generate_id(self, prefix):
+        # Counting existing IDs keeps generated identifiers predictable by type.
         id_count = 0
 
         existing_items = self.staff_members + self.patients
@@ -106,7 +104,7 @@ class ClinicManager:
         return f"{prefix}{next_number:04d}"
     
 
-    def daily_report(self, budget_amount = 0):
+    def daily_report(self, budget_amount=0):
         total_staff = len(self.staff_members)
         total_patients = len(self.patients)
         nurses = []
@@ -132,8 +130,9 @@ class ClinicManager:
                 else:
                     doctor_budget_status.append(f"{staff_member.name}: Budget exceeded!")
         
+        # A report still needs a meaningful value when no nurses are registered.
         if nurses:
-            top_nurse = max(nurses, key=lambda nurse:nurse.patients_attended_today)
+            top_nurse = max(nurses, key=lambda nurse: nurse.patients_attended_today)
         else:
             top_nurse = None
 
