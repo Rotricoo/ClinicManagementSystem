@@ -1,5 +1,4 @@
 # Purpose: define the base patient model and regular-priority behavior.
-# Group members: Rick Grimes - 123456
 # Date: 2026-09-14
 
 class Patient:

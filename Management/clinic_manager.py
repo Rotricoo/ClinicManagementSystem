@@ -1,5 +1,4 @@
 # Purpose: manage clinic records and produce operational reports.
-# Group members: Rick Grimes - 123456
 # Date: 2026-09-14
 
 from People.Staff.MedicalStaff.nurse import Nurse

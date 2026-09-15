@@ -1,5 +1,4 @@
 # Purpose: start the clinic application and load initial data.
-# Group members: Rick Grimes - 123456
 # Date: 2026-09-14
 
 from Management.clinic_manager import ClinicManager

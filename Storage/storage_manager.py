@@ -1,5 +1,4 @@
 # Purpose: persist clinic data and export reports to common text formats.
-# Group members: Rick Grimes - 123456
 # Date: 2026-09-14
 
 import pickle

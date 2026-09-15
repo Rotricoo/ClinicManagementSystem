@@ -1,5 +1,4 @@
 # Purpose: define the patient type that receives priority care.
-# Group members: Rick Grimes - 123456
 # Date: 2026-09-14
 
 from People.Patient.patient import Patient

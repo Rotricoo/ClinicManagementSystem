@@ -1,5 +1,4 @@
 # Purpose: verify clinic management, reporting, deletion, and persistence behavior.
-# Group members: Rick Grimes - 123456
 # Date: 2026-09-14
 
 import tempfile

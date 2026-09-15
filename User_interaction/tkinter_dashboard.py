@@ -1,5 +1,4 @@
 # Purpose: display clinic summaries and registered people in a Tkinter window.
-# Group members: Rick Grimes - 123456
 # Date: 2026-09-14
 
 import tkinter as tk

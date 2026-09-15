@@ -1,5 +1,4 @@
 # Purpose: define shared fields and display behavior for medical staff.
-# Group members: Rick Grimes - 123456
 # Date: 2026-09-14
 
 class MedicalStaff:

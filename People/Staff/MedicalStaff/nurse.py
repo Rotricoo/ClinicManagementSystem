@@ -1,5 +1,4 @@
 # Purpose: define nurses and track patients attended during the day.
-# Group members: Rick Grimes - 123456
 # Date: 2026-09-14
 
 from People.Staff.MedicalStaff.medical_staff import MedicalStaff
